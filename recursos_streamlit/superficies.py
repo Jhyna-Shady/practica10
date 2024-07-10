@@ -37,3 +37,22 @@ class Sinusoide(Superficie3D):
 
     def calcular_z(self):
         return np.sin(self.frecuencia * np.sqrt(self.x**2 + self.y**2))
+
+class Hiperboloide(Superficie3D):
+    def __init__(self, x_range, y_range, a, b, c):
+        super().__init__(x_range, y_range)
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def calcular_z(self):
+        return (self.x**2 / self.a**2 - self.y**2 / self.b**2) * self.c
+
+class Esfera(Superficie3D):
+    def __init__(self, x_range, y_range, radio):
+        super().__init__(x_range, y_range)
+        self.radio = radio
+
+    def calcular_z(self):
+        z_pos = np.sqrt(np.maximum(0, self.radio**2 - self.x**2 - self.y**2))
+        return z_pos  # Solo devuelve la parte positiva de la esfera
