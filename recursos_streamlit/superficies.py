@@ -6,8 +6,8 @@ class Superficie3D:
         # Inicializa los rangos de x e y y crea una malla de puntos
         self.x_range = x_range
         self.y_range = y_range
-        self.x, self.y = np.meshgrid(np.linspace(x_range[0], x_range[1], 300), 
-                                     np.linspace(y_range[0], y_range[1], 300))
+        self.x, self.y = np.meshgrid(np.linspace(x_range[0], x_range[1], 100), 
+                                     np.linspace(y_range[0], y_range[1], 100))
 
     # Método que deben implementar las subclases para calcular z
     def calcular_z(self):
