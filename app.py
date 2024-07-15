@@ -1,35 +1,35 @@
 import streamlit as st
 import json
-from recursos_streamlit.superficies import  Plano, Paraboloide, Sinusoide, Hiperboloide, Esfera
+from recursos_streamlit.superficies import Plano, Paraboloide, Sinusoide, Hiperboloide, Esfera
 from recursos_streamlit.visualizador import Visualizador3DPlotly
 from recursos_streamlit.configuraciones import guardar_configuracion, descargar_configuracion, cargar_configuracion
 
-
 def main():
+    # Título de la aplicación
     st.title("Visualización en 3D")
     st.subheader("Elija el cuerpo geométrico")
 
-    # Menú de selección
+    # Menú de selección para elegir el tipo de superficie
     tipo = st.radio("Seleccione una opción", ["Plano", "Paraboloide", "Sinusoide", "Hiperboloide", "Esfera"])
 
     # Configuración de parámetros basada en la selección
     if tipo == "Plano":
         pendiente = st.slider("Ingrese la pendiente del plano:", min_value=-10.0, max_value=10.0, value=1.0)
-        superficie = Plano((-5, 5), (-5, 5), pendiente)
+        superficie = Plano((-15, 15), (-15, 15), pendiente)
     elif tipo == "Paraboloide":
         coef = st.slider("Ingrese el coeficiente del paraboloide:", min_value=0.1, max_value=10.0, value=1.0)
-        superficie = Paraboloide((-5, 5), (-5, 5), coef)
+        superficie = Paraboloide((-15, 15), (-15, 15), coef)
     elif tipo == "Sinusoide":
         frecuencia = st.slider("Ingrese la frecuencia de la sinusoide:", min_value=0.1, max_value=10.0, value=1.0)
-        superficie = Sinusoide((-5, 5), (-5, 5), frecuencia)
+        superficie = Sinusoide((-15, 15), (-15, 15), frecuencia)
     elif tipo == "Hiperboloide":
         a = st.slider("Ingrese el valor de 'a' del hiperboloide:", min_value=0.1, max_value=10.0, value=1.0)
         b = st.slider("Ingrese el valor de 'b' del hiperboloide:", min_value=0.1, max_value=10.0, value=1.0)
         c = st.slider("Ingrese el valor de 'c' del hiperboloide:", min_value=0.1, max_value=10.0, value=1.0)
-        superficie = Hiperboloide((-5, 5), (-5, 5), a, b, c)
+        superficie = Hiperboloide((-15, 15), (-15, 15), a, b, c)
     elif tipo == "Esfera":
         radio = st.slider("Ingrese el radio de la esfera:", min_value=0.1, max_value=10.0, value=1.0)
-        superficie = Esfera((-5, 5), (-5, 5), radio)
+        superficie = Esfera((-15, 15), (-15, 15), radio)
     else:
         st.error("Opción no válida.")
         return
@@ -61,15 +61,15 @@ def main():
         configuracion = json.loads(contenido)
         st.write(configuracion)
         if configuracion['tipo'] == "Plano":
-            superficie = Plano((-5, 5), (-5, 5), configuracion['parametros']['pendiente'])
+            superficie = Plano((-15, 15), (-15, 15), configuracion['parametros']['pendiente'])
         elif configuracion['tipo'] == "Paraboloide":
-            superficie = Paraboloide((-5, 5), (-5, 5), configuracion['parametros']['coef'])
+            superficie = Paraboloide((-15, 15), (-15, 15), configuracion['parametros']['coef'])
         elif configuracion['tipo'] == "Sinusoide":
-            superficie = Sinusoide((-5, 5), (-5, 5), configuracion['parametros']['frecuencia'])
+            superficie = Sinusoide((-15, 15), (-15, 15), configuracion['parametros']['frecuencia'])
         elif configuracion['tipo'] == "Hiperboloide":
-            superficie = Hiperboloide((-5, 5), (-5, 5), configuracion['parametros']['a'], configuracion['parametros']['b'], configuracion['parametros']['c'])
+            superficie = Hiperboloide((-15, 15), (-15, 15), configuracion['parametros']['a'], configuracion['parametros']['b'], configuracion['parametros']['c'])
         elif configuracion['tipo'] == "Esfera":
-            superficie = Esfera((-5, 5), (-5, 5), configuracion['parametros']['radio'])
+            superficie = Esfera((-15, 15), (-15, 15), configuracion['parametros']['radio'])
 
     # Visualización
     visualizador = Visualizador3DPlotly(superficie)
