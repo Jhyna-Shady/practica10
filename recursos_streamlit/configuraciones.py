@@ -1,5 +1,4 @@
 import json
-import os
 import streamlit as st
 
 # Función para guardar la configuración en un archivo JSON
